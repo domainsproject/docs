@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mintilfy Domains",
+    "version": "1.0.0",
+    "description": "Returns the list of domains maintained by the Mintilfy project."
+  },
+  "servers": [
+    {
+      "url": "https://raw.githubusercontent.com"
+    }
+  ],
+  "paths": {
+    "/domainsproject/raw/refs/heads/main/index.json": {
+      "get": {
+        "operationId": "getMintilfyDomains",
+        "summary": "Fetch Mintilfy domains list",
+        "description": "Returns a list of open domain configurations from Mintilfy.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of domain configurations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "domain": {
+                        "type": "string"
+                      },
+                      "subdomain": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "object",
+                        "properties": {
+                          "repo": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "email": {
+                            "type": "string",
+                            "format": "email"
+                          }
+                        },
+                        "required": ["repo", "email"]
+                      },
+                      "record": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "description": "DNS records like A, AAAA, MX, TXT, etc."
+                      },
+                      "proxied": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": ["domain", "subdomain", "owner"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
