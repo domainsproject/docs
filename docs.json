@@ -11,25 +11,43 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Overview",
             "pages": [
-              "introduction",
-              "quickstart",
-              "development"
+              "core/introduction",
+              "core/quickstart"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Guides",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "guides/configuration",
+              "guides/rules",
+              "guides/dns"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "help/faq",
+              "help/resources",
+              "help/roadmap"
+            ]
+          },
+          {
+            "group": "Community",
+            "pages": [
+              "community/contributors",
+              "community/supporters"
+            ]
+          }, 
+          {
+            "group": "Legal",
+            "pages": [
+              "legal/terms",
+              "legal/privacy"
             ]
           }
         ]
