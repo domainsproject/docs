@@ -1,49 +1,81 @@
 ---
 title: "Introduction"
-description: "Welcome to the home of your new documentation"
-icon: "house"
+description: "Free developer subdomains under owns.it.com, with more domains coming soon."
+icon: "globe"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
+A free and open-source service offering developer-friendly subdomains under curated root domains.
 
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+Start by claiming a subdomain like `yourname.owns.it.com`, and use it for your personal site, open-source project, portfolio, or any public-facing tool. No cost, no tracking, no hidden catch — just a clean, GitHub-powered workflow.
 
-## Setting up
+---
 
-The first step to world-class documentation is setting up your editing environments.
+## How it works
 
-<CardGroup cols="2">
-  <Card title="Edit Your Docs" icon="pen-to-square" href="https://mintlify.com/docs/quickstart">
-    Get your docs set up locally for easy development
+<AccordionGroup>
+
+  <Accordion icon="code-fork" title="1. Fork the repository">
+    Go to our [GitHub repository](https://github.com/yourorg/register) and fork it to your GitHub account. This will create your own editable copy.
+  </Accordion>
+
+  <Accordion icon="file-code" title="2. Add your subdomain config">
+    In the `domains/` directory, create a new JSON file named after the subdomain you want (e.g., `yourname.json`). Inside, specify your DNS configuration such as a CNAME or A record.
+  </Accordion>
+
+  <Accordion icon="code-branch" title="3. Submit a pull request">
+    Commit and push your changes, then open a pull request to our main repository. Our maintainers will review and merge your PR.
+  </Accordion>
+
+  <Accordion icon="rocket" title="4. Your subdomain goes live">
+    Once merged, your subdomain will be publicly accessible and automatically connected to the DNS record you specified.
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## Why use this service?
+
+<CardGroup>
+
+  <Card title="Free for everyone" icon="coins" href="/rules">
+    Subdomains are free to register and use. This project is maintained by the community and funded by supporters.
   </Card>
-  <Card title="Preview Changes" icon="image" href="https://mintlify.com/docs/development">
-    Preview your changes before you push to make sure they're perfect
+
+  <Card title="Git-based and open" icon="code" href="https://github.com/yourorg/register">
+    All configurations are version-controlled and publicly stored in a GitHub repository.
   </Card>
+
+  <Card title="Works with modern hosting" icon="server" href="/dns">
+    Compatible with GitHub Pages, Vercel, Netlify, Cloudflare Pages, and custom hosting.
+  </Card>
+
+  <Card title="Built for developers" icon="terminal" href="/configuration">
+    Uses simple, extensible JSON configuration. No dashboards, just pull requests.
+  </Card>
+
 </CardGroup>
 
-## Make it yours
+---
+## Supported domains
 
-Update your docs to your brand and add valuable content for the best user conversion.
+We currently offer subdomains under `owns.it.com`.
 
-<CardGroup cols="2">
-  <Card title="Customize Style" icon="palette" href="https://mintlify.com/docs/settings/global">
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card title="Reference APIs" icon="code" href="https://mintlify.com/docs/api-playground/openapi">
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card title="Add Components" icon="screwdriver-wrench" href="https://mintlify.com/docs/content/components/accordions">
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card title="Get Inspiration" icon="stars" href="https://mintlify.com/customers">
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+More domains will be added soon — some sponsored by the community.  
+Learn more on the [Domains](/domains) page or [Sponsor a domain](/supporters).
+
+---
+
+## Quick links
+
+- [Get Started](/getting-started)
+- [Configuration](/configuration)
+- [Rules & Guidelines](/rules)
+- [FAQ](/faq)
+- [Contributors](/contributors)
+- [Supporters](/supporters)
+
+---
+
+This project is fully open-source and community-maintained.  
+Contributions, feedback, and sponsorship are always welcome.

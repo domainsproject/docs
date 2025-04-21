@@ -1,108 +1,201 @@
 ---
-title: 'Configuration'
-description: 'Preview changes locally to update your docs'
-icon: "gear"
+title: "Configuration"
+description: "Learn how to configure your subdomain with CNAME, A, or TXT records."
+icon: "Gear"
 ---
 
-<Info>
-  **Prerequisite**: Please install Node.js (version 19 or higher) before proceeding. <br />
-  Please upgrade to ```docs.json``` before proceeding and delete the legacy ```mint.json``` file.
-</Info>
 
-Follow these steps to install and run Mintlify on your operating system:
+To request a subdomain, you need to create a JSON configuration file that tells us how your subdomain should behave.
 
-**Step 1**: Install Mintlify:
+Each configuration file is added to the `domains/` directory in the repository and must be named after the subdomain you want to claim. For example, if you're requesting `yourname.owns.it.com`, your file should be:
 
-<CodeGroup>
-
-  ```bash npm
-  npm i -g mintlify
-  ```
-
-```bash yarn
-yarn global add mintlify
+```
+domains/yourname.json
 ```
 
-</CodeGroup>
+---
 
-**Step 2**: Navigate to the docs directory (where the `docs.json` file is located) and execute the following command:
+## Basic structure
 
-```bash
-mintlify dev
+Here's what a minimal configuration looks like:
+
+```json
+{
+  "owner": {
+    "email": "you@example.com"
+  },
+  "record": {
+    "CNAME": "yourusername.github.io"
+  }
+}
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+- `owner.email` is required. This is used for internal communication if needed — it's not publicly displayed.
+- `record` defines the DNS record we should create for your subdomain. We support `A`, `AAAA`, `CNAME`, `TXT`, `MX`, `SRV`, and `CAA` records.
 
-### Custom Ports
+---
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. To run Mintlify on port 3333, for instance, use this command:
+## Supported DNS record types
 
-```bash
-mintlify dev --port 3333
+You can use one or more of the following record types:
+
+### A Record
+Maps a domain name to an IPv4 address.
+
+```json
+{
+  "record": {
+    "A": ["192.0.2.1"]
+  }
+}
 ```
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+### AAAA Record
+Maps a domain name to an IPv6 address.
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
+```json
+{
+  "record": {
+    "AAAA": ["2001:0db8:85a3::8a2e:0370:7334"]
+  }
+}
 ```
 
-## Mintlify Versions
+### CNAME Record
+Points one domain name to another (alias).
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local website doesn't align with the production version, please update the CLI:
-
-<CodeGroup>
-
-```bash npm
-npm i -g mintlify@latest
+```json
+{
+  "record": {
+    "CNAME": "yourusername.github.io"
+  }
+}
 ```
 
-```bash yarn
-yarn global upgrade mintlify
+### MX Record
+Specifies mail servers for handling email on the domain.
+
+```json
+{
+  "record": {
+    "MX": ["10 mail.example.com"]
+  }
+}
 ```
 
-</CodeGroup>
+### TXT Record
+Stores arbitrary text data, often used for verification.
 
-## Validating Links
-
-The CLI can assist with validating reference links made in your documentation. To identify any broken links, use the following command:
-
-```bash
-mintlify broken-links
+```json
+{
+  "record": {
+    "TXT": ["v=spf1 include:_spf.example.com ~all"]
+  }
+}
 ```
 
-## Deployment
+### SRV Record
+Defines the location of servers for specific services (e.g., VoIP, IM).
 
-<Tip>
-  Unlimited editors available under the [Pro
-  Plan](https://mintlify.com/pricing) and above.
-</Tip>
+```json
+{
+  "record": {
+    "SRV": ["_sip._tcp.example.com 0 5 5060 sipserver.example.com"]
+  }
+}
+```
 
-If the deployment is successful, you should see the following:
+### CAA Record
+Specifies which certificate authorities (CAs) are allowed to issue certificates for the domain.
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+```json
+{
+  "record": {
+    "CAA": ["0 issue \"letsencrypt.org\""]
+  }
+}
+```
 
-## Code Formatting
+You can also combine multiple record types:
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+```json
+{
+  "record": {
+    "A": ["192.0.2.1"],
+    "TXT": ["project-verification=xyz"],
+    "CAA": ["0 issue \"letsencrypt.org\""]
+  }
+}
+```
 
-## Troubleshooting
+---
 
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
+## Optional: Proxy setting
 
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of mintlify: `npm remove -g mintlify`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall mintlify: `npm install -g mintlify`
-  </Accordion>
+Some domains may support proxying (e.g., through Cloudflare). If so, you can add:
 
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the \~/.mintlify folder. Afterwards, run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
+```json
+{
+  "proxy": true
+}
+```
 
-Curious about what changed in the CLI version? [Check out the CLI changelog.](https://www.npmjs.com/package/mintlify?activeTab=versions)
+> Note: Proxying behavior depends on the domain and our DNS setup. If it's unsupported, this field will be ignored.
+
+---
+
+## Full examples
+
+### GitHub Pages
+
+```json
+{
+  "owner": {
+    "email": "jane@example.com"
+  },
+  "record": {
+    "CNAME": "janedoe.github.io"
+  }
+}
+```
+
+### Vercel app
+
+```json
+{
+  "owner": {
+    "email": "sam@example.com"
+  },
+  "record": {
+    "CNAME": "myproject.vercel.app"
+  }
+}
+```
+
+### Custom server
+
+```json
+{
+  "owner": {
+    "email": "you@example.com"
+  },
+  "record": {
+    "A": ["93.184.216.34"]
+  }
+}
+```
+
+---
+
+## Good to know
+
+- Only one domain per config file.
+- Your subdomain request will be reviewed before it goes live.
+- Submitting a malformed JSON will delay processing — use a JSON validator if needed.
+- You can always update your config by submitting a new pull request.
+
+---
+
+Need help with your configuration?  
+Visit the [Get Started](/getting-started) guide or [open an issue](https://github.com/yourorg/register/issues).
+

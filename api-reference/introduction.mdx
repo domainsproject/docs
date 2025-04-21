@@ -1,0 +1,71 @@
+---
+title: "Introduction"
+description: "Introduction to the public API and how to interact with it."
+icon: "webhook"
+---
+
+This section introduces the public API provided by the subdomain registry service.
+
+The API allows developers to fetch a list of registered subdomains and use that data to build dashboards, search tools, or integrations. It's lightweight, read-only, and available without authentication.
+
+---
+
+## What the API does
+
+The API exposes structured data about all public subdomains registered through the service. This includes:
+
+- Subdomain names
+- Target records (CNAME, A, etc.)
+- Domain metadata
+
+It's useful for:
+- Building dashboards
+- Monitoring usage
+- Creating tools that reference or analyze active subdomains
+
+---
+
+## Current capabilities
+
+The API currently supports one endpoint:
+
+### GET `/api/domains`
+
+Returns a list of registered subdomains and their DNS configurations.
+
+### Example response:
+
+```json
+[
+  {
+    "subdomain": "yourname",
+    "domain": "owns.it.com",
+    "type": "CNAME",
+    "value": "yourusername.github.io"
+  },
+  {
+    "subdomain": "project123",
+    "domain": "owns.it.com",
+    "type": "A",
+    "value": "192.0.2.1"
+  }
+]
+```
+
+---
+
+## Planned improvements
+
+Future endpoints may include:
+
+- Domain availability checks
+- Filters by domain or record type
+- Domain usage statistics
+- Authenticated endpoints for managing personal configs
+
+---
+
+## Feedback & contributions
+
+Want to help shape the API? Open a discussion or contribute directly via pull request on [GitHub](https://github.com/yourorg/register).
+

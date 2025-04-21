@@ -17,15 +17,16 @@
             "group": "Overview",
             "pages": [
               "core/introduction",
+              "core/domains",
               "core/quickstart"
             ]
           },
           {
             "group": "Guides",
             "pages": [
+              "guides/dns",
               "guides/configuration",
-              "guides/rules",
-              "guides/dns"
+              "guides/rules"
             ]
           },
           {
@@ -62,7 +63,7 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Endpoints",
             "pages": [
               "api-reference/endpoint/get"
             ]

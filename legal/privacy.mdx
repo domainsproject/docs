@@ -1,108 +1,74 @@
 ---
-title: 'Privacy Policy'
-description: 'Our privacy policy'
-icon: "shield-halved"
+title: "Privacy Policy"
+description: "How we handle and protect your information when using this service."
+icon: "lock"
 ---
 
-<Info>
-  **Prerequisite**: Please install Node.js (version 19 or higher) before proceeding. <br />
-  Please upgrade to ```docs.json``` before proceeding and delete the legacy ```mint.json``` file.
-</Info>
 
-Follow these steps to install and run Mintlify on your operating system:
+We respect your privacy and aim to collect as little personal information as possible while operating this service.
 
-**Step 1**: Install Mintlify:
+This document outlines what data we collect, how we use it, and how your information is protected.
 
-<CodeGroup>
+---
 
-  ```bash npm
-  npm i -g mintlify
-  ```
+## 1. What We Collect
 
-```bash yarn
-yarn global add mintlify
-```
+We collect the following information only when you submit a subdomain request:
 
-</CodeGroup>
+- **Email address** (from the `owner.email` field in your configuration file)
+- **GitHub metadata** associated with your pull request (username, timestamp, etc.)
 
-**Step 2**: Navigate to the docs directory (where the `docs.json` file is located) and execute the following command:
+We do not store or collect:
 
-```bash
-mintlify dev
-```
+- Browsing behavior
+- Cookies or analytics from your website
+- Any private or sensitive server data
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+---
 
-### Custom Ports
+## 2. How We Use It
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. To run Mintlify on port 3333, for instance, use this command:
+- To contact you only if we need to follow up on your request
+- To help maintain a record of ownership and accountability
+- To manage DNS entries and update them when needed
 
-```bash
-mintlify dev --port 3333
-```
+We will never sell, share, or monetize your information.
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+---
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
+## 3. Public Information
 
-## Mintlify Versions
+- Your subdomain configuration file will be **publicly stored** in the GitHub repository
+- Any information you include in that file (such as email or links) will be visible to anyone
+- Do not include sensitive data in your config or pull request
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local website doesn't align with the production version, please update the CLI:
+---
 
-<CodeGroup>
+## 4. Third-Party Services
 
-```bash npm
-npm i -g mintlify@latest
-```
+We may use the following services to operate the platform:
 
-```bash yarn
-yarn global upgrade mintlify
-```
+- **GitHub** – for hosting the code and reviewing pull requests
+- **Cloudflare or DNS provider** – to manage DNS records
 
-</CodeGroup>
+These providers may store metadata as part of their infrastructure.
 
-## Validating Links
+---
 
-The CLI can assist with validating reference links made in your documentation. To identify any broken links, use the following command:
+## 5. Data Removal
 
-```bash
-mintlify broken-links
-```
+To update or delete your configuration:
 
-## Deployment
+- Open a pull request to remove your config file
+- Or [contact us](mailto:you@example.com) to request manual removal
 
-<Tip>
-  Unlimited editors available under the [Pro
-  Plan](https://mintlify.com/pricing) and above.
-</Tip>
+---
 
-If the deployment is successful, you should see the following:
+## 6. Policy Updates
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+We may update this policy at any time. Changes will be reflected on this page, and your continued use of the service implies acceptance.
 
-## Code Formatting
+---
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+If you have questions or concerns, please [open an issue](https://github.com/yourorg/register/issues) or email us at [you@example.com](mailto:you@example.com).
 
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of mintlify: `npm remove -g mintlify`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall mintlify: `npm install -g mintlify`
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the \~/.mintlify folder. Afterwards, run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the CLI version? [Check out the CLI changelog.](https://www.npmjs.com/package/mintlify?activeTab=versions)
