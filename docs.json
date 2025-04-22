@@ -75,17 +75,17 @@
       "anchors": [
         {
           "anchor": "Repository",
-          "href": "https://github.com/mintlify/mintlify-domains",
+          "href": "https://github.com/domainsproject/register",
           "icon": "github"
         },
         {
           "anchor": "Community",
-          "href": "https://mintlify.com/community",
+          "href": "https://discord.gg/jtVHRF9CdK",
           "icon": "discord"
         },
         {
           "anchor": "Support",
-          "href": "https://mintlify.com/support",
+          "href": "https://dub.sh/sponsor-a-domain",
           "icon": "heart"
         }
       ]
@@ -99,13 +99,13 @@
     "links": [
       {
         "label": "Contact",
-        "href": "mailto:hi@owns.it.com"
+        "href": "mailto:contact@tanvir.io"
       }
     ]
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/mintlify"
+      "github": "https://github.com/domainsproject"
     }
   },
   "seo": {
