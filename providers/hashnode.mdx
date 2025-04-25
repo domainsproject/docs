@@ -1,0 +1,60 @@
+---
+title: "Hashnode"
+description: "How to set up your Hashnode blog with an owns.it.com subdomain."
+---
+
+# Setting up Hashnode with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up your Hashnode blog with an owns.it.com subdomain instead of the default hashnode.dev domain.
+
+## Configure Hashnode
+
+1. Log in to your [Hashnode account](https://hashnode.com)
+2. Click on your avatar (bottom-left corner on desktop, top-right on mobile)
+3. Select **Blog Dashboard** from the popup modal
+4. Navigate to the **Domain** tab
+5. Enter your owns.it.com subdomain without the www or https:// prefix
+6. Click the **Update** button
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "hashnode.network"
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address
+
+**Important**: If your domain file already exists, make sure to remove any old records before adding the new CNAME record.
+
+## Your blog should be live!
+
+After your pull request has been merged, your Hashnode blog should be accessible at your owns.it.com subdomain. The process may take some time for DNS changes to propagate (typically within an hour, but can take up to 48 hours).
+
+### Troubleshooting
+
+If your blog isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that the CNAME record is set to `hashnode.network`
+3. Confirm that your domain is correctly set in Hashnode's dashboard
+4. Wait for DNS changes to propagate
+
+## Need More Help?
+
+If you need additional assistance:
+
+- Visit the [Hashnode Domain Mapping Guide](https://support.hashnode.com/en/articles/6423579-mapping-your-domain) for detailed instructions
+- Check the [Hashnode Support Center](https://support.hashnode.com) for general help
+
+**Note**: owns.it.com is not affiliated with Hashnode. For Hashnode-specific issues, please use Hashnode's support channels.

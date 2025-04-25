@@ -1,0 +1,65 @@
+---
+title: "ImprovMX"
+description: "How to set up email forwarding with ImprovMX for your owns.it.com subdomain."
+---
+
+# Setting up ImprovMX with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up email forwarding with ImprovMX for your owns.it.com subdomain.
+
+## Requirements
+
+Before you begin, make sure you have:
+1. An [ImprovMX account](https://improvmx.com) - create one if you haven't already
+2. Your owns.it.com subdomain ready to use
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "MX": ["mx1.improvmx.com", "mx2.improvmx.com"],
+        "TXT": ["v=spf1 include:spf.improvmx.com ~all"]
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address
+
+## Configure ImprovMX
+
+After your pull request has been merged:
+
+1. Go to the [ImprovMX dashboard](https://app.improvmx.com)
+2. Add your owns.it.com subdomain
+3. Configure your email forwarding rules as needed
+
+## Your email forwarding should be live!
+
+After completing all steps and your pull request has been merged, the MX records should be automatically recognized and start working. The process may take some time for DNS changes to propagate.
+
+### Troubleshooting
+
+If email forwarding isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that both MX records are properly set
+3. Confirm that the SPF record (TXT) is correctly configured
+4. Make sure your domain is properly added in the ImprovMX dashboard
+5. Wait for DNS changes to propagate (this can take up to 48 hours)
+6. Test the email forwarding by sending a test email
+
+## Need More Help?
+
+For additional assistance:
+- Visit the [ImprovMX Documentation](https://improvmx.com/guides/)
+- Contact [ImprovMX Support](https://improvmx.com/support/)
+
+**Note**: owns.it.com is not affiliated with ImprovMX. For ImprovMX-specific issues, please use their support channels.

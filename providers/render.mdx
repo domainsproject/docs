@@ -1,0 +1,73 @@
+---
+title: "Render"
+description: "How to set up a Render deployment and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Render with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Render deployment and pointing your owns.it.com subdomain towards it.
+
+## Create a Render Service
+
+First, you'll need to create a service on Render:
+
+1. Go to the [Render Documentation](https://render.com/docs)
+2. Follow the instructions to create and deploy your service
+3. Note down your Render service URL for reference
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "description": "Describe the use of this subdomain",
+    "repo": "https://github.com/github-username/github-repository",
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "A": ["216.24.57.1"]
+    }
+}
+```
+
+Replace:
+- `github-username` with your GitHub username
+- `github-repository` with your repository name
+- `your-email@example.com` with your email address
+
+**Note**: In the owner section, you can add any social media handle, such as Discord. If you add another social media account, you can omit the email field. However, the GitHub username is mandatory. Don't forget to provide a preview of your website in your pull request.
+
+## Configure Render
+
+After your pull request is merged:
+
+1. Go to your Render service dashboard
+2. Navigate to **Settings** > **Custom Domains**
+3. Click **Add Custom Domain**
+4. Enter your owns.it.com subdomain (e.g., `your-subdomain.owns.it.com`)
+5. Render will provide a verification step - you can skip this if your subdomain is already pointing to Render's IP address (`216.24.57.1`)
+
+## Your website should be live!
+
+After completing all steps and your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that the A record points to Render's IP address (`216.24.57.1`)
+3. Confirm that your domain is properly added in Render's settings
+4. Wait for DNS changes to propagate (this can take up to 48 hours)
+5. Check that your Render service is running correctly
+
+## Need More Help?
+
+For additional assistance:
+- Visit the [Render Documentation](https://render.com/docs)
+- Check the [Render Help Center](https://render.com/docs/help)
+- Contact [Render Support](https://render.com/support)
+
+**Note**: owns.it.com is not affiliated with Render. For Render-specific issues, please use their support channels.

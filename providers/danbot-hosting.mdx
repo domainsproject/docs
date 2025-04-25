@@ -1,0 +1,65 @@
+---
+title: "DanBot Hosting"
+description: "How to set up a DanBot Hosting website and point your owns.it.com subdomain towards it."
+---
+
+# Setting up DanBot Hosting with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a DanBot Hosting website and pointing your owns.it.com subdomain to it.
+
+## Getting Proxy IP
+
+Execute the following command in DanBot Hosting Discord server in the #commands channel:
+
+```bash
+dbh!server proxy
+```
+
+You will get a reply with proxy options. If you are on a free plan, choose any US proxy or you can use the Donator Proxy if you are a Donator. Note the IP address of the proxy you chose.
+
+## Creating the domain file
+
+Create a JSON file inside domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "description": "Describe the use of this subdomain",
+    "repo": "https://github.com/github-username/github-repository",
+    "owner": {
+        "username": "github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "A": ["proxy-ip-here"]
+    }
+}
+```
+
+Note: In the owner section, you can add any social media handle, such as Discord. If you add another social media account, you may omit the email field. However, the GitHub username is mandatory. Don't forget to provide a preview of your website in your pull request.
+
+## Configuring
+
+After your pull request is merged, get your server ID by running this command:
+
+```bash
+dbh!server list
+```
+
+Note down the server ID, then execute the following command:
+
+```bash
+dbh!server proxy your-subdomain.owns.it.com yourserverid
+```
+
+## Your website should be live!
+
+After completing all steps and your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that your proxy IP is correct and active
+3. Confirm that your server ID is correct
+4. Wait a few minutes for DNS changes to propagate (this can take up to 48 hours)
+5. Check your DanBot Hosting server status

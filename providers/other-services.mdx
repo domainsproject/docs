@@ -1,0 +1,99 @@
+---
+title: "Other Services"
+description: "How to set up your owns.it.com subdomain with any other hosting service or server."
+---
+
+# Setting up other services with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up your owns.it.com subdomain with any hosting service or server not covered by our other guides.
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the appropriate DNS records for your service. The file structure will depend on your hosting requirements:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "A": ["your-ipv4-address"],
+        "AAAA": ["your-ipv6-address"],
+        "CNAME": "your-hostname",
+        "MX": ["your-mail-server"],
+        "TXT": ["your-txt-record"]
+    }
+}
+```
+
+Replace the records section with only the DNS records required by your service. Common record types include:
+- `A`: IPv4 address
+- `AAAA`: IPv6 address
+- `CNAME`: Hostname
+- `MX`: Mail server
+- `TXT`: Text records (often used for verification)
+
+## Configure Your Server
+
+After your pull request is merged:
+
+1. Configure your web server (Apache, Nginx, etc.) to handle requests for your owns.it.com subdomain
+2. Update your SSL certificate to include your owns.it.com subdomain
+3. Configure any additional service-specific settings
+
+### Apache Configuration Example
+
+```apache
+<VirtualHost *:443>
+    ServerName your-subdomain.owns.it.com
+    DocumentRoot /var/www/your-site
+    
+    SSLEngine on
+    SSLCertificateFile /path/to/certificate.crt
+    SSLCertificateKeyFile /path/to/private.key
+</VirtualHost>
+```
+
+### Nginx Configuration Example
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name your-subdomain.owns.it.com;
+    root /var/www/your-site;
+
+    ssl_certificate /path/to/certificate.crt;
+    ssl_certificate_key /path/to/private.key;
+}
+```
+
+## SSL Certificate
+
+To avoid certificate errors, make sure to:
+1. Include your owns.it.com subdomain in your SSL certificate
+2. Use a valid SSL certificate from a trusted provider
+3. Keep your certificate up to date
+
+## Your website should be live!
+
+After completing all steps and your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that your DNS records are correct for your service
+3. Confirm that your web server configuration is correct
+4. Ensure your SSL certificate includes your subdomain
+5. Wait for DNS changes to propagate (this can take up to 48 hours)
+6. Check your web server logs for any errors
+
+## Need Help?
+
+If you need assistance:
+1. Check your service provider's documentation
+2. Review your web server's documentation ([Apache](https://httpd.apache.org/docs/), [Nginx](https://nginx.org/en/docs/))
+3. [Create an issue](https://github.com/owns-it-com/register/issues) for support with your specific setup
+
+**Note**: Make sure to remove any sensitive information (like private keys or passwords) before sharing configurations when asking for help.

@@ -1,0 +1,64 @@
+---
+title: "Codeberg Pages"
+description: "How to set up a Codeberg Pages website and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Codeberg Pages with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Codeberg Pages website and pointing your owns.it.com subdomain towards it.
+
+## Create a Codeberg Pages Website
+
+First, you'll need to create a website on Codeberg Pages:
+
+1. Go to [Codeberg](https://codeberg.org) and sign in to your account
+2. Create a new repository or use an existing one
+3. Enable Codeberg Pages in your repository settings
+4. Follow the [Codeberg Pages Guide](https://docs.codeberg.org/codeberg-pages/) to set up your site
+5. Note down your site's URL (it will be in the format `pages.your-codeberg-username.codeberg.page`)
+
+## Create the Domain File
+
+In the domains directory, create a new JSON file for your subdomain (`domains/subdomain.json`) and submit a pull request. This file should contain the following:
+
+```json
+{
+    "owner": {
+        "username": "your-codeberg-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "pages.your-codeberg-username.codeberg.page"
+    }
+}
+```
+
+Replace:
+- `your-codeberg-username` with your Codeberg username
+- `your-email@example.com` with your email address
+
+## Add .domains File
+
+After your pull request is merged, you'll need to configure Codeberg Pages to recognize your custom domain:
+
+1. Create a `.domains` file in your repository's root directory
+2. Add your owns.it.com subdomain (e.g., `your-subdomain.owns.it.com`) to the file
+3. Commit and push the changes to your repository
+
+Example `.domains` file content:
+```plaintext
+your-subdomain.owns.it.com
+```
+
+## Your website should be live!
+
+After completing all steps and your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that your Codeberg Pages site is deployed and accessible at the original URL
+3. Confirm that your `.domains` file exists and contains the correct domain
+4. Wait a few minutes for DNS changes to propagate (this can take up to 48 hours)
+5. Check the Pages settings in your Codeberg repository

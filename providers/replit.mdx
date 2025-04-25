@@ -1,0 +1,70 @@
+---
+title: "Replit"
+description: "How to set up a Replit project and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Replit with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Replit project and pointing your owns.it.com subdomain towards it.
+
+## Create a Replit Project
+
+First, you'll need to create a project on Replit:
+
+1. Go to the [Replit Workspace Guide](https://docs.replit.com/getting-started/creating-a-repl)
+2. Follow the instructions to create your project
+3. Make sure your project is deployed and running
+
+## Connect Your Domain to Replit
+
+Next, you'll need to connect your owns.it.com subdomain to your Replit project:
+
+1. Go to the [Replit Custom Domains Guide](https://docs.replit.com/hosting/hosting-web-pages#custom-domains)
+2. Follow only the "Connecting your domain to your repl" section
+3. Copy your Replit domain (it will be in the format `siteid.id.repl.co`)
+4. Return to this guide for the next steps
+
+**Important**: Do not add any TXT records, even if Replit instructs you to do so.
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "siteid.id.repl.co"
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address
+- `siteid.id.repl.co` with your Replit domain
+
+## Your website should be live!
+
+After your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that the CNAME record matches your Replit domain exactly
+3. Confirm that your Replit project is running
+4. Make sure your project's web server is configured correctly
+5. Wait for DNS changes to propagate (this can take up to 48 hours)
+
+## Need More Help?
+
+For additional assistance:
+- Visit the [Replit Documentation](https://docs.replit.com/)
+- Check the [Replit Help Center](https://replit.com/help)
+- Join the [Replit Discord](https://replit.com/discord)
+
+**Note**: owns.it.com is not affiliated with Replit. For Replit-specific issues, please use their support channels.

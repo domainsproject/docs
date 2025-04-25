@@ -1,0 +1,70 @@
+---
+title: "Railway"
+description: "How to set up a Railway deployment and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Railway with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Railway deployment and pointing your owns.it.com subdomain towards it.
+
+## Get the CNAME Record
+
+First, you'll need to get the CNAME record from Railway:
+
+1. Go to the [Railway dashboard](https://railway.app/dashboard)
+2. Navigate to your project
+3. Select your service
+4. Switch to the **Settings** tab
+5. Click the **+ Custom Domain** button
+6. Enter your owns.it.com subdomain
+7. Copy the **Value** field provided by Railway
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "the-value-railway-gave-you"
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address
+- `the-value-railway-gave-you` with the CNAME value you copied from Railway
+
+**Important**: Since the Railway CNAME value doesn't show your actual website, you must include a preview of your website in your pull request.
+
+## Your website should be live!
+
+After your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that the CNAME record matches exactly what Railway provided
+3. Confirm that your domain is properly added in Railway's settings
+4. Wait for DNS changes to propagate (this can take up to 48 hours)
+5. Check that your Railway service is running correctly
+
+If you've waited 48 hours and the DNS records haven't updated:
+1. Verify your Railway service is still active
+2. Check that the custom domain is properly configured in Railway
+3. Create an issue for support if problems persist
+
+## Need More Help?
+
+For additional assistance:
+- Visit the [Railway Documentation](https://docs.railway.app/)
+- Check the [Railway Support](https://railway.app/support)
+- Contact [Railway Support Team](https://railway.app/support)
+
+**Note**: owns.it.com is not affiliated with Railway. For Railway-specific issues, please use their support channels.

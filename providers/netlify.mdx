@@ -1,0 +1,73 @@
+---
+title: "Netlify"
+description: "How to set up a Netlify website and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Netlify with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Netlify deployment and pointing your owns.it.com subdomain towards it.
+
+## Create a Netlify Website
+
+First, you'll need to create a website on Netlify:
+
+1. Go to the [Netlify Getting Started Guide](https://docs.netlify.com/get-started/)
+2. Follow the instructions to create and deploy your site
+3. Note down your Netlify site URL for reference
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "description": "Describe the use of this subdomain",
+    "repo": "https://github.com/github-username/github-repository",
+    "owner": {
+        "username": "github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "A": ["75.2.60.5"]
+    }
+}
+```
+
+Replace:
+- `github-username` with your GitHub username
+- `github-repository` with your repository name
+- `your-email@example.com` with your email address
+
+**Note**: In the owner section, you can add any social media handle, such as Discord. If you add another social media account, you can omit the email field. However, the GitHub username is mandatory. Don't forget to provide a preview of your website in your pull request.
+
+## Configure Netlify
+
+After your pull request is merged:
+
+1. Go to your Netlify site dashboard
+2. Navigate to **Site Settings** > **Domain Management** > **Custom Domains**
+3. Click **Add custom domain**
+4. Enter your owns.it.com subdomain (e.g., `your-subdomain.owns.it.com`)
+5. Netlify will provide a verification step - you can skip this if your subdomain is already pointing to Netlify's IP address (`75.2.60.5`)
+
+## Your website should be live!
+
+After completing all steps and your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that the A record points to Netlify's IP address (`75.2.60.5`)
+3. Confirm that your domain is properly added in Netlify's settings
+4. Wait for DNS changes to propagate (this can take up to 48 hours)
+5. Check the SSL/TLS certificate status in your Netlify settings
+
+## Need More Help?
+
+For additional assistance:
+- Visit the [Netlify Docs](https://docs.netlify.com/)
+- Check the [Netlify Support Forums](https://answers.netlify.com/)
+- Contact [Netlify Support](https://www.netlify.com/support/)
+
+**Note**: owns.it.com is not affiliated with Netlify. For Netlify-specific issues, please use their support channels.

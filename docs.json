@@ -24,9 +24,26 @@
           {
             "group": "Guides",
             "pages": [
-              "guides/dns",
               "guides/configuration",
               "guides/rules"
+            ]
+          },
+          {
+            "group": "Common Providers",
+            "pages": [
+              "providers/cloudflare-pages",
+              "providers/codeberg-pages",
+              "providers/danbot-hosting",
+              "providers/discord-domain",
+              "providers/github-pages",
+              "providers/hashnode",
+              "providers/improvmx",
+              "providers/netlify",
+              "providers/other-services",
+              "providers/railway",
+              "providers/render",
+              "providers/replit",
+              "providers/vercel"
             ]
           },
           {

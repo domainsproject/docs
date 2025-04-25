@@ -1,0 +1,58 @@
+---
+title: "Cloudflare Pages"
+description: "How to set up a Cloudflare Pages website and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Cloudflare Pages with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Cloudflare Pages website and pointing your owns.it.com subdomain towards it.
+
+## Create a Cloudflare Pages Website
+
+First, you'll need to create a website on Cloudflare Pages:
+
+1. Go to the [Cloudflare Pages Getting Started Guide](https://developers.cloudflare.com/pages/get-started)
+2. Follow the instructions to create and deploy your site
+3. Note down your site's URL (it will be in the format `your-sitename.pages.dev`)
+
+## Point your subdomain to your Cloudflare Pages site
+
+Next, you'll need to point your owns.it.com subdomain to your Cloudflare Pages website:
+
+1. Go to the [Cloudflare Pages Custom Domains Guide](https://developers.cloudflare.com/pages/platform/custom-domains)
+2. Follow only the "Add a custom domain" section
+3. Use your owns.it.com subdomain (e.g., `yourname.owns.it.com`) as the custom domain
+4. Return to this guide for the next steps
+
+## Create the Domain File
+
+In the domains directory, create a new JSON file for your subdomain (`domains/subdomain.json`) and submit a pull request. This file should contain the following:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "your-sitename.pages.dev"
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address
+- `your-sitename.pages.dev` with your Cloudflare Pages site URL
+
+## Your website should be live!
+
+After your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain file is correctly formatted
+2. Verify that your Cloudflare Pages site is deployed and accessible
+3. Wait a few minutes for DNS changes to propagate (this can take up to 48 hours)
+4. Check the custom domain settings in your Cloudflare Pages project

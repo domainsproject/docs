@@ -1,0 +1,58 @@
+---
+title: "Discord"
+description: "How to verify your owns.it.com subdomain with Discord."
+---
+
+# Setting up Discord domain verification with your owns.it.com subdomain
+
+This guide will walk you through the process of verifying your owns.it.com subdomain with Discord.
+
+## Get your verification string
+
+1. Open your Discord app and go to **Settings**
+2. Navigate to the **Connections** section
+3. Click the **View more** button
+4. Click on the **domain button** (the globe icon)
+5. In the field that appears, type your owns.it.com domain name (e.g., `example.owns.it.com`)
+6. Copy the verification string that Discord provides
+
+## Create the Domain File
+
+Create a JSON file inside the domains directory (`domains/_discord.example.json`) with the following content and submit a pull request:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "TXT": "discord-verification-string"
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address
+- `discord-verification-string` with the verification string you copied from Discord
+
+## Verify your domain
+
+After your pull request has been merged:
+1. Return to Discord's domain verification page
+2. Enter your owns.it.com domain again
+3. Click the **Verify** button
+
+### Troubleshooting
+
+If your verification fails:
+1. Check that your domain file is correctly formatted
+2. Verify that the TXT record matches exactly what Discord provided
+3. Wait for DNS changes to propagate (this can take up to 24 hours)
+4. Try the verification process again after waiting
+
+If you see an error like "Unable to verify your domain", this is usually because:
+- DNS changes haven't fully propagated yet
+- The verification string doesn't match exactly
+- The domain file format is incorrect

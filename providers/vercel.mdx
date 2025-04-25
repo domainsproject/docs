@@ -1,0 +1,118 @@
+---
+title: "Vercel"
+description: "How to set up a Vercel site and point your owns.it.com subdomain towards it."
+---
+
+# Setting up Vercel with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a Vercel site and pointing your owns.it.com subdomain towards it.
+
+## Create a Vercel Site
+
+First, you'll need to have a site deployed on Vercel:
+
+1. Go to the [Vercel Documentation](https://vercel.com/docs)
+2. Follow the instructions to create and deploy your site
+3. Make sure your site is accessible at your Vercel domain (e.g., `your-site.vercel.app`)
+
+## Configure Your Domain in Vercel
+
+Before creating the domain files:
+
+1. Go to your [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your project
+3. Navigate to "Settings" → "Domains"
+4. Enter your owns.it.com subdomain (e.g., `yourname.owns.it.com`)
+5. Note down the TXT verification string provided by Vercel
+
+## Create the Domain Files
+
+You'll need to create two files for this setup. Let's go through them in order:
+
+### 1. Vercel TXT Verification File
+
+Create `_vercel.subdomain.json` in the domains directory (replace "subdomain" with your desired subdomain):
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "TXT": "vercel-verification-string"
+    }
+}
+```
+
+Replace:
+- `your-github-username` with your GitHub username
+- `your-email@example.com` with your email address (or social media handle)
+- `vercel-verification-string` with the TXT string from Vercel
+
+**Important**: Do not submit a pull request yet! You need to create the main domain file first.
+
+### 2. Main Domain File
+
+Create `subdomain.json` in the domains directory (replace "subdomain" with your desired subdomain). You can choose either CNAME or A record configuration:
+
+#### Option A: Using CNAME Record (Recommended)
+Use this if you don't need additional records like MX:
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "your-site.vercel.app"
+    }
+}
+```
+
+#### Option B: Using A Record
+Use this if you need to use additional records (requires preview):
+
+```json
+{
+    "owner": {
+        "username": "your-github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "A": ["76.76.21.21"]
+    }
+}
+```
+
+**Note**: If using an A record, you must provide a preview of your site in your pull request (either a link or screenshot).
+
+## Submit Your Pull Request
+
+After creating both files:
+1. Submit a pull request to the main repository
+2. If using an A record, include a preview of your site
+3. Wait for the pull request to be merged
+
+## Your website should be live!
+
+After your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that both domain files are correctly formatted
+2. Verify that the TXT verification string matches exactly
+3. Clear your browser cache if the site is still redirecting to owns.it.com
+4. Wait for DNS changes to propagate (this can take up to 48 hours)
+5. Verify your domain configuration in Vercel's dashboard
+
+## Need More Help?
+
+For additional assistance:
+- Visit the [Vercel Documentation](https://vercel.com/docs)
+- Check the [Vercel Help Center](https://vercel.com/help)
+- Contact [Vercel Support](https://vercel.com/help/support)
+
+**Note**: owns.it.com is not affiliated with Vercel. For Vercel-specific issues, please use their support channels.

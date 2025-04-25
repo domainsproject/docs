@@ -1,0 +1,104 @@
+---
+title: "GitHub Pages"
+description: "How to set up a GitHub Pages website and point your owns.it.com subdomain towards it."
+---
+
+# Setting up GitHub Pages with an owns.it.com subdomain
+
+This guide will walk you through the process of setting up a GitHub Pages site and pointing your owns.it.com subdomain to it.
+
+## Creating a GitHub Pages repository
+
+First, you'll need to create a site on GitHub Pages:
+
+1. Go to the [GitHub Pages Getting Started Guide](https://docs.github.com/en/pages/getting-started-with-github-pages)
+2. Follow the instructions to create your site
+3. Note down your GitHub Pages URL (it will be in the format `github-username.github.io`)
+
+## Creating the domain file
+
+Create a JSON file inside domains directory (`domains/subdomain.json`) with the following content and submit a pull request:
+
+```json
+{
+    "description": "Describe the use of this subdomain",
+    "repo": "https://github.com/github-username/github-repository",
+    "owner": {
+        "username": "github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "CNAME": "github-username.github.io"
+    }
+}
+```
+
+Replace:
+- `github-username` with your GitHub username
+- `github-repository` with your repository name
+- `your-email@example.com` with your email address
+
+## Configuring GitHub Pages
+
+After your pull request is merged:
+
+1. Go to your GitHub Pages repository
+2. Navigate to **Settings** > **Pages**
+3. Under **Custom domain**, enter your owns.it.com subdomain (e.g., `subdomain.owns.it.com`)
+4. Check the **Enforce HTTPS** checkbox
+5. Wait for the changes to take effect
+
+## Verifying your owns.it.com Subdomain
+
+GitHub requires domain verification for enhanced security. Here's how to verify your domain:
+
+### Get your verification string
+
+1. Go to GitHub and click your profile icon at the top right
+2. Click **Settings**
+3. Click **Pages**
+4. Click **Add a domain**
+5. Enter your owns.it.com subdomain (e.g., `myname.owns.it.com`)
+6. Click **Add domain**
+7. Copy both the hostname and verification string
+
+### Create the verification file
+
+Create a JSON file inside the domains directory (`domains/hostname.subdomain.json`) using the hostname you copied and your subdomain, with the following content:
+
+```json
+{
+    "owner": {
+        "username": "github-username",
+        "email": "your-email@example.com"
+    },
+    "records": {
+        "TXT": "github-verification-string"
+    }
+}
+```
+
+Replace:
+- `github-username` with your GitHub username
+- `your-email@example.com` with your email address
+- `github-verification-string` with the verification string from GitHub
+
+### Complete verification
+
+After your pull request is merged:
+1. Return to GitHub's domain verification page
+2. Click the **Verify** button
+
+## Your website should be live!
+
+After completing all steps and your pull request has been merged, your website should be accessible at your owns.it.com subdomain. The process may take a few minutes for DNS changes to propagate.
+
+### Troubleshooting
+
+If your site isn't working:
+1. Check that your domain files are correctly formatted
+2. Verify that the CNAME record points to your GitHub Pages domain
+3. Confirm that the TXT record matches the verification string exactly
+4. Make sure the custom domain is set in your repository's Pages settings
+5. Wait for DNS changes to propagate (this can take up to 24 hours)
+6. Check that HTTPS is enforced in your GitHub Pages settings
