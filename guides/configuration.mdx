@@ -1,201 +1,206 @@
 ---
 title: "Configuration"
-description: "Learn how to configure your subdomain with CNAME, A, or TXT records."
+description: "Learn how to configure your subdomain with DNS records and additional settings."
 icon: "Gear"
 ---
 
-
 To request a subdomain, you need to create a JSON configuration file that tells us how your subdomain should behave.
 
-Each configuration file is added to the `domains/` directory in the repository and must be named after the subdomain you want to claim. For example, if you're requesting `yourname.owns.it.com`, your file should be:
+Each configuration file is added to the `domains/` directory in the repository and must follow specific naming conventions.
 
-```
-domains/yourname.owns.it.com.json
-```
+## Filename Requirements
 
----
+Your configuration file must meet these criteria:
 
-## Basic structure
+- Must be alphanumeric, in lowercase
+- Dashes (-) may be used as separators
+- Must be at least 1 character long
+- Must have a `.json` file extension
+- Must not contain the parent domain name
+
+### Invalid Filename Examples
+- `.json` (filename is less than 1 character)
+- `A.json` (contains uppercase letters)
+- `a..json` (contains consecutive dots)
+- `.a.json` (starts with a dot)
+- `a .json` (contains a space)
+- `a$.json` (contains non-alphanumeric character)
+- `a.json.json` (multiple .json extensions)
+
+### Valid Filename Examples
+- `a.json` (at least 1 character long)
+- `example.json` (alphanumeric and lowercase)
+- `blog.example.json` (includes dots for sub-subdomains)
+- `my-blog.json` (uses dashes as separators)
+
+> Note: To prevent monopolization, users are limited to one one-letter subdomain.
+
+## Basic Structure
 
 Here's what a minimal configuration looks like:
 
 ```json
 {
+  "description": "My personal website",
+  "repo": "https://github.com/username/repo",
   "owner": {
+    "username": "your-github-username",
     "email": "yourname@example.com"
   },
-  "record": {
-    "CNAME": "yourusername.github.io"
+  "records": {
+    "CNAME": "username.github.io"
+  },
+  "proxied": false
+}
+```
+
+## Required Fields
+
+### owner
+Information about the domain owner. This is required for communication if needed.
+
+```json
+{
+  "owner": {
+    "username": "your-github-username",
+    "email": "yourname@example.com"
   }
 }
 ```
 
-- `owner.email` is required. This is used for internal communication if needed — it's not publicly displayed.
-- `record` defines the DNS record we should create for your subdomain. We support `A`, `AAAA`, `CNAME`, `TXT`, `MX`, `SRV`, and `CAA` records.
+### records
+Defines the DNS records for your subdomain. At least one record type is required.
 
----
+## Optional Fields
 
-## Supported DNS record types
+### description
+A brief description of your domain's purpose (optional but recommended).
 
-You can use one or more of the following record types:
+### repo
+Link to your website's repository or GitHub account (optional).
 
-### A Record
-Maps a domain name to an IPv4 address.
+### proxied
+Enable Cloudflare proxying for your domain (defaults to false).
 
 ```json
 {
-  "record": {
-    "A": ["192.0.2.1"]
+  "proxied": true
+}
+```
+
+## Supported DNS Records
+
+### CNAME Record
+Points your domain to another hostname.
+
+```json
+{
+  "records": {
+    "CNAME": "username.github.io"
+  }
+}
+```
+
+### A Record
+Maps your domain to IPv4 addresses.
+
+```json
+{
+  "records": {
+    "A": [
+      "192.0.2.1",
+      "198.51.100.1"
+    ]
   }
 }
 ```
 
 ### AAAA Record
-Maps a domain name to an IPv6 address.
+Maps your domain to IPv6 addresses.
 
 ```json
 {
-  "record": {
-    "AAAA": ["2001:0db8:85a3::8a2e:0370:7334"]
-  }
-}
-```
-
-### CNAME Record
-Points one domain name to another (alias).
-
-```json
-{
-  "record": {
-    "CNAME": "yourusername.github.io"
+  "records": {
+    "AAAA": [
+      "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+    ]
   }
 }
 ```
 
 ### MX Record
-Specifies mail servers for handling email on the domain.
+Specifies mail servers for your domain.
 
 ```json
 {
-  "record": {
-    "MX": ["10 mail.example.com"]
+  "records": {
+    "MX": [
+      {
+        "target": "mx1.example.com",
+        "priority": 10
+      },
+      {
+        "target": "mx2.example.com",
+        "priority": 20
+      }
+    ]
   }
 }
 ```
 
 ### TXT Record
-Stores arbitrary text data, often used for verification.
+Stores text information, often used for verification.
 
 ```json
 {
-  "record": {
+  "records": {
     "TXT": ["v=spf1 include:_spf.example.com ~all"]
   }
 }
 ```
 
 ### SRV Record
-Defines the location of servers for specific services (e.g., VoIP, IM).
+Defines service locations (e.g., VoIP, messaging, gaming servers).
 
 ```json
 {
-  "record": {
-    "SRV": ["_sip._tcp.example.com 0 5 5060 sipserver.example.com"]
+  "records": {
+    "SRV": [
+      {
+        "priority": 10,
+        "weight": 5,
+        "port": 8080,
+        "target": "srv.example.com"
+      }
+    ]
   }
 }
 ```
 
 ### CAA Record
-Specifies which certificate authorities (CAs) are allowed to issue certificates for the domain.
+Controls which Certificate Authorities can issue SSL certificates.
 
 ```json
 {
-  "record": {
-    "CAA": ["0 issue \"letsencrypt.org\""]
+  "records": {
+    "CAA": [
+      {
+        "flags": 0,
+        "tag": "issue",
+        "value": "letsencrypt.org"
+      }
+    ]
   }
 }
 ```
 
-You can also combine multiple record types:
+## Important Notes
 
-```json
-{
-  "record": {
-    "A": ["192.0.2.1"],
-    "TXT": ["project-verification=xyz"],
-    "CAA": ["0 issue \"letsencrypt.org\""]
-  }
-}
-```
+- Each domain requires its own configuration file
+- JSON must be valid - use a JSON validator if needed
+- Your subdomain request will be reviewed before approval
+- You can update your configuration by submitting a new pull request
+- Some record combinations may have restrictions (e.g., CNAME with other records)
 
----
-
-## Optional: Proxy setting
-
-Some domains may support proxying (e.g., through Cloudflare). If so, you can add:
-
-```json
-{
-  "proxy": true
-}
-```
-
-> Note: Proxying behavior depends on the domain and our DNS setup. If it's unsupported, this field will be ignored.
-
----
-
-## Full examples
-
-### GitHub Pages
-
-```json
-{
-  "owner": {
-    "email": "jane@example.com"
-  },
-  "record": {
-    "CNAME": "janedoe.github.io"
-  }
-}
-```
-
-### Vercel app
-
-```json
-{
-  "owner": {
-    "email": "sam@example.com"
-  },
-  "record": {
-    "CNAME": "myproject.vercel.app"
-  }
-}
-```
-
-### Custom server
-
-```json
-{
-  "owner": {
-    "email": "contact@tanvir.io"
-  },
-  "record": {
-    "A": ["93.184.216.34"]
-  }
-}
-```
-
----
-
-## Good to know
-
-- Only one domain per config file.
-- Your subdomain request will be reviewed before it goes live.
-- Submitting a malformed JSON will delay processing — use a JSON validator if needed.
-- You can always update your config by submitting a new pull request.
-
----
-
-Need help with your configuration?  
-Visit the [Get Started](/core/quickstart.mdx) guide or [open an issue](https://github.com/domainsproject/register/issues).
+Need help? Visit our [Get Started](/core/quickstart.mdx) guide or [open an issue](https://github.com/domainsproject/register/issues).
 
